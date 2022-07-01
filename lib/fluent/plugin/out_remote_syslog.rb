@@ -139,11 +139,15 @@ module Fluent
             options
           )
         else
+          options = {
+            whinyerrors: true,
+            packet_size: @packet_size,
+            program: @program,
+          }
           sender = RemoteSyslogSender::UdpSender.new(
             host,
             port,
-            whinyerrors: true,
-            program: @program,
+            options
           )
         end
         @senders << sender
